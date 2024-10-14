@@ -1,7 +1,5 @@
 package com.example.EmployeeSystem.controller;
 
-//package com.example.check_in_check_out_system.controller;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.EmployeeSystem.model.Employee;
 import com.example.EmployeeSystem.service.EmployeeService;
