@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Map;
 import java.util.Optional;
 
 //This can handle HTTP requests and return responses in JSON format
@@ -28,19 +29,28 @@ public class EmployeeController {
     }
 
 
-    @PostMapping("/checkin/{id}")
-    public ResponseEntity<Employee> checkIn(@PathVariable Long id) {
-       Employee checkIdEmployee = employeeService.checkIn(id); //Call the service to perform the check-in
-       return new ResponseEntity<>(checkIdEmployee, HttpStatus.OK); //Return employee with successful check-in
-
+    @PatchMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+        Employee updatedEmployee = employeeService.updateEmployee(id, updates);
+        return ResponseEntity.ok(updatedEmployee);
     }
 
 
-    @PutMapping("/checkout/{id}") //Updates an existing resource
-    public ResponseEntity<Optional<Employee>> checkOut(@PathVariable Long id) {
-        Optional<Employee> person = Optional.ofNullable(employeeService.checkOut(id));
-        return ResponseEntity.ok(person); //Represent the http response
-    }
+
+// http://localhost:8762/employeesystem/api/v1/people/checkin/49
+//    @PostMapping("/checkin/{id}")
+//    public ResponseEntity<Employee> checkIn(@PathVariable Long id) {
+//       Employee checkIdEmployee = employeeService.checkIn(id); //Call the service to perform the check-in
+//       return new ResponseEntity<>(checkIdEmployee, HttpStatus.OK); //Return employee with successful check-in
+//
+//    }
+
+// http://localhost:8762/employeesystem/api/v1/people/checkout/49
+//    @PutMapping("/checkout/{id}") //Updates an existing resource
+//    public ResponseEntity<Optional<Employee>> checkOut(@PathVariable Long id) {
+//        Optional<Employee> person = Optional.ofNullable(employeeService.checkOut(id));
+//        return ResponseEntity.ok(person); //Represent the http response
+//    }
 
     //URL: http://localhost:8080/api/v1/people
     @GetMapping //Retrieves data for a resource
