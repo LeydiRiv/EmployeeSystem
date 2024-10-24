@@ -1,7 +1,5 @@
 package com.example.EmployeeSystem.model;
 
-//package com.example.check_in_check_out_system.model;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 

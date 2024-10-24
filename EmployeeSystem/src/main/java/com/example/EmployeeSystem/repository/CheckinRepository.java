@@ -1,10 +1,9 @@
 package com.example.EmployeeSystem.repository;
 
-import com.example.EmployeeSystem.model.Employee;
+import com.example.EmployeeSystem.model.CheckIn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface CheckinRepository extends JpaRepository<CheckIn, Long> {
 }
-

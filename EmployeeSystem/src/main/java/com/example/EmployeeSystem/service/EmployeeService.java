@@ -1,10 +1,8 @@
 package com.example.EmployeeSystem.service;
 
-//package com.example.check_in_check_out_system.service;
-
-import com.example.CheckInSystem.model.CheckIn;
+import com.example.EmployeeSystem.model.CheckIn;
 import com.example.EmployeeSystem.model.Employee;
-import com.example.CheckInSystem.repository.CheckinRepository;
+import com.example.EmployeeSystem.repository.CheckinRepository;
 import com.example.EmployeeSystem.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,24 +24,35 @@ public class EmployeeService {
         this.checkinRepository = checkinRepository;
     }
 
-    // Check-in
-    public Employee checkIn(Employee request) {
+
+    // RegisterEmployee
+    public Employee registerEmployee(Employee request) {
+        CheckIn checkin = new CheckIn(); //Create a new object from check-in
         Employee employee = new Employee();
+
         employee.setName(request.getName());
         employee.setDepartment(request.getDepartment());
         employee.setPosition(request.getPosition());
         employee.setEmail(request.getEmail());
-
-        CheckIn checkin = new CheckIn(); //Create a new object from check-in
-        checkin.setCheckInTime(LocalDateTime.now()); //Save the dateTime
-        //Add status
-        checkin.setStatus(true);
-        //Refer Check-in to Employee
         checkin.setEmployee(employee); // Associate the check-in to the Employee
-        employee.getCheckIns().add(checkin); // Save the check-in in the ArrayList
 
         return employeeRepository.save(employee);
     }
+
+
+    //Check-in
+    public Employee checkIn(Long id){
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Error! The Employee doesn't exist."));
+        CheckIn checkin = new CheckIn(); //Create a new object from check-in
+        checkin.setStatus(true);
+        checkin.setCheckInTime(LocalDateTime.now()); //Save the dateTime
+        checkin.setEmployee(employee); // Associate the check-in to the Employee
+        employee.getCheckIns().add(checkin); // Save the check-in in the ArrayList
+        return employeeRepository.save(employee);
+
+    }
+
+
 
     //Check-out
     public Employee checkOut(Long id) {
@@ -68,6 +77,11 @@ public class EmployeeService {
         return employeeRepository.save(employee);
 
     }
+
+
+
+
+
 
     //All the records
     public List<Employee> getAllRecords() {
