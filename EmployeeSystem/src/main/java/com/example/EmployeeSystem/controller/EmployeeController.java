@@ -28,29 +28,11 @@ public class EmployeeController {
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
-
-    @PatchMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
-        Employee updatedEmployee = employeeService.updateEmployee(id, updates);
-        return ResponseEntity.ok(updatedEmployee);
+    @PutMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee) {
+        Employee savedEmployee = employeeService.updateEmployee(id, updatedEmployee);
+        return ResponseEntity.ok(savedEmployee);
     }
-
-
-
-// http://localhost:8762/employeesystem/api/v1/people/checkin/49
-//    @PostMapping("/checkin/{id}")
-//    public ResponseEntity<Employee> checkIn(@PathVariable Long id) {
-//       Employee checkIdEmployee = employeeService.checkIn(id); //Call the service to perform the check-in
-//       return new ResponseEntity<>(checkIdEmployee, HttpStatus.OK); //Return employee with successful check-in
-//
-//    }
-
-// http://localhost:8762/employeesystem/api/v1/people/checkout/49
-//    @PutMapping("/checkout/{id}") //Updates an existing resource
-//    public ResponseEntity<Optional<Employee>> checkOut(@PathVariable Long id) {
-//        Optional<Employee> person = Optional.ofNullable(employeeService.checkOut(id));
-//        return ResponseEntity.ok(person); //Represent the http response
-//    }
 
     //URL: http://localhost:8080/api/v1/people
     @GetMapping //Retrieves data for a resource
