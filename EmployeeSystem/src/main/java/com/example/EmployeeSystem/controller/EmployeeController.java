@@ -1,5 +1,8 @@
 package com.example.EmployeeSystem.controller;
 
+import com.example.EmployeeSystem.repository.EmployeeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.EmployeeSystem.model.Employee;
 import com.example.EmployeeSystem.service.EmployeeService;
@@ -19,6 +22,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+//    @Autowired
+//    private EmployeeRepository employeeRepository;
 
 
     //register employee
@@ -46,4 +52,16 @@ public class EmployeeController {
         employeeService.deleteRecord(id);
         return ResponseEntity.noContent().build();
     }
+
+
+
+//    @GetMapping
+//    public Page<Employee> getAllEmployees(
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "10") int size
+//    ) {
+//        return employeeRepository.findAll(PageRequest.of(page, size));
+//    }
+
+
 }
