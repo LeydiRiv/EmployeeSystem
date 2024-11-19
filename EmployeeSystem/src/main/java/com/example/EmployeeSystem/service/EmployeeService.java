@@ -26,6 +26,20 @@ public class EmployeeService {
 
     // RegisterEmployee
     public Employee registerEmployee(Employee request) {
+
+        if (request.getName() == null || request.getName().isEmpty()){
+            throw new RuntimeException("Error: The name is empty or null.");
+        }
+        if (request.getDepartment() == null || request.getDepartment().isEmpty()) {
+            throw new RuntimeException("Error: The department is empty or null.");
+        }
+        if (request.getPosition() == null || request.getPosition().isEmpty()){
+            throw  new RuntimeException("Error: The position is empty or null.");
+        }
+        if (request.getEmail() == null || request.getEmail().isEmpty()){
+            throw new RuntimeException("Error: The email is empty or null.");
+        }
+
         CheckIn checkin = new CheckIn(); //Create a new object from check-in
         Employee employee = new Employee();
 
